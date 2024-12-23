@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Discover and learn about the 7 Wonders of the World, 7 Continents, Digital Wonders, and more in an interactive and educational app.">
+    <meta name="author" content="Abu Momen">
+    <meta name="keywords"
+        content="7 Wonders, Seven Wonders, 7 Continents, Interactive Learning, Educational App, Digital Wonders, Effective Habits">
+    <meta property="og:title" content="7 Wonders by Abu Momen">
+    <meta property="og:description"
+        content="Explore the wonders of the world and beyond with this fun and engaging educational app. Learn interactively about continents, habits, and more.">
+    <meta property="og:image" content="path/to/7wonders-preview-image.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myghub23.github.io/7wonders.github.io/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="7 Wonders by Abu Momen">
+    <meta name="twitter:description"
+        content="An interactive app to learn about the 7 Wonders of the World, continents, habits, and more. Fun and educational!">
+    <meta name="twitter:image" content="path/to/7wonders-preview-image.jpg">
+
+    <title>Discovers Abu Momen</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            padding: 10px;
+        }
+
+        .container {
+            text-align: center;
+            width: 360px;
+            /* Fixed width for consistency */
+            height: 405px;
+            /* Fixed height for consistency */
+            padding: 5px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 2px solid green;
+            /* Consistent border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
+            transition: border-bottom-width 0.3s ease;
+            position: relative;
+            display: flex;
+            /* Enable flexbox layout */
+            flex-direction: column;
+            /* Stack children vertically */
+            justify-content: space-between;
+            /* Push footer to the bottom */
+            margin: 0 auto;
+            /* Center the container horizontally */
+        }
+
+
+
+        .header-section {
+            margin-top: 20px;
+            background-color: rgb(177, 173, 230);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header-section button {
+            position: absolute;
+            top: 5px;
+            padding: 2px 5px;
+            background-color: blue;
+            color: yellow;
+            border-radius: 5px;
+        }
+
+        #AudioBtn {
+            position: absolute;
+            top: -1px;
+            right: 10px;
+            width: 30px;
+            /* Adjust the size of the audio icon */
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #AudioBtn:hover {
+            transform: scale(1.1);
+            /* Slight zoom on hover */
+        }
+
+        .header-section span {
+            display: inline-block;
+            background-color: yellow;
+            /* Apply background only to the text area */
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            color: blue;
+            text-align: center;
+        }
+
+        .gallery {
+            margin-top: -170px;
+            /* Center the grid container */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Always 3 columns */
+            gap: 5px;
+            /* Minimal gap between boxes */
+            justify-content: start;
+            /* Align grid items to the left */
+            align-items: center;
+            /* Vertically align the items */
+
+        }
+
+        .wonder.category-Technology,
+        .wonder.category-Mathematics,
+        .wonder.category-Medicine,
+        .wonder.category-Chemistry,
+        .wonder.category-Engineering,
+        .wonder.category-Geography {
+            background: linear-gradient(to right, white, orange, yellow, green);
+            /* Use 'background' instead of 'background-color' */
+            border-radius: 10px;
+            padding: 5px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            color: #000080;
+            font-size: 18px;
+        }
+
+        #info-box {
+            display: none;
+            text-align: justify;
+            position: absolute;
+            left: 42%;
+            transform: translateX(-41%);
+            top: 245px;
+            margin-top: -10px;
+            background-color: rgba(22, 4, 99, 0.8);
+            color: #ffffff;
+            border: 2px solid #26a69a;
+            border-radius: 10px;
+            width: 340px;
+            font-size: 12px;
+            padding: 5px;
+            height: 130px;
+            /* Added fixed height */
+        }
+
+
+        #info-box h2 {
+            text-align: center;
+            font-weight: bold;
+            margin: 0;
+            color: #ffdd57;
+            font-size: 1rem;
+        }
+
+        #info-description {
+            margin-top: 2px;
+            font-size: 14px;
+            color: white;
+            white-space: pre-wrap;
+            line-height: 1.2;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 5px;
+            background: #0073e6;
+            color: white;
+            /* Light grey background for footer */
+            border-top: 1px solid #ccc;
+            /* Add a border at the top */
+            font-size: 12px;
+            position: relative;
+            /* Ensure it stays within the container */
+            flex-shrink: 0;
+            /* Prevent footer from shrinking */
+            border-radius: 10px;
+        }
+
+        .footer span {
+            background-color: rgb(247, 247, 187);
+            padding: 2px 5px;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 0px;
+            left: 70px;
+            padding: 4px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: yellow;
+            /* Set dropdown background color to yellow */
+            cursor: pointer;
+            color: blue;
+            font-weight: bold;
+        }
+
+        .dropdown:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Styles for small phones (max-width: 600px) */
+        @media (max-width: 600px) {
+            #info-box {
+                width: 320px;
+                left: 42%;
+            }
+
+            #info-box h2 {
+                font-size: .9rem;
+            }
+
+            #info-box p {
+                display: inline;
+                margin: 0;
+                font-size: .8rem;
+            }
+        }
+
+        /* Styles for tablets in portrait (601px to 768px) */
+        @media (min-width: 601px) and (max-width: 768px) {
+            #info-box {
+                width: 320px;
+                left: 42%;
+            }
+
+            #info-box h2 {
+                font-size: 1rem;
+            }
+
+            #info-box p {
+                font-size: .9rem;
+            }
+        }
+
+        /* Styles for small laptops (769px to 992px) */
+        @media (min-width: 769px) and (max-width: 992px) {
+            #info-box {
+                width: 320px;
+                left: 42%;
+            }
+
+            #info-box h2 {
+                font-size: 1.1rem;
+            }
+
+            #info-box p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Styles for larger laptops and desktops (993px to 1200px) */
+        @media (min-width: 993px) and (max-width: 1200px) {
+            #info-box {
+                width: 320px;
+                left: 42%;
+            }
+
+            #info-box h2 {
+                font-size: 1.2rem;
+            }
+
+            #info-box p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff5722;
+            margin-top: -30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-section">
+            <div class="header-title">Discover</div>
+            <select id="categoryDropdown" class="dropdown">
+                <option value="Chemistry" selected>Chemistry</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Geography">Geography</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Medicine">Medicine</option>
+                <option value="Technology">Technology</option>
+            </select>
+            <div>
+                <span id="7wonderText"></span> <!-- Text removed -->
+            </div>
+            <img id="AudioBtn" src="images/audiooff.png" alt="Toggle Audio" />
+        </div>
+
+        <div class="gallery">
+            <div class="wonder">
+            </div>
+       </div>
+
+        <div id="info-box">
+            <h2 id="info-title"></h2>
+            <p id="info-description"></p>
+        </div>
+
+
+        <div class="footer">
+            Created by <a href="mailto:mydreamcarebd@gmail.com"
+                style="color:yellow; text-decoration: underline;"><strong>Abu Momen</strong></a> | © 2024 All Rights
+            Reserved
+        </div>
+
+    </div>
+
+    <script>
+        let audioEnabled = false; // Track the state of audio (enabled or disabled)
+
+        // Add "Technology" to dropdown options
+
+        // Categories data
+        const categories = {
+            "Technology": {
+                title: "Technology",
+                data: {
+                    computer: {
+                        title: "<b><i style='color: blue;'>Computer</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow'>Computer</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Charles Babbage<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1837<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Often called the 'first computer', the Analytical Engine was a mechanical device capable of performing calculations. It laid the foundation for modern computing."
+                        // • Description:</strong> Often called the 'first computer,' the Analytical Engine was a mechanical device capable of performing calculations. It laid the foundation for modern computing."
+                    },
+                    internet: {
+                        title: "<b><i style='color: blue;'>Internet</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Internet</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Vinton Cerf and Robert Kahn<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1983<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> The creation of the Internet revolutionized communication, connecting computers globally. It laid the foundation for modern digital connectivity and paved the way for the World Wide Web."
+                    },
+                    artificialIntelligence: {
+                        title: "<b><i style='color: blue;'>Artificial Intelligence</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Artificial Intelligence</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> John McCarthy<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1956<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> AI involves creating machines capable of mimicking human intelligence. It has applications in automation, problem-solving, and advanced data analysis."
+                    },
+                    gps: {
+                        title: "<b><i style='color: blue;'>GPS</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>GPS (Global Positioning System)</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> U.S. Department of Defense<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1978<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> GPS technology allows for accurate location tracking and navigation, which has become integral in transportation, logistics, and everyday mobile devices."
+                    },
+                    worldWideWeb: {
+                        title: "<b><i style='color: blue;'>World Wide Web</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>World Wide Web (www)</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Tim Berners-Lee<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1989<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> The World Wide Web made the Internet accessible to the public by introducing a system of linked hypertext documents. It transformed how we access and share information."
+
+                    },
+                    smartphone: {
+                        title: "<b><i style='color: red'>Smartphone</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Smartphone</i></b>",
+
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> IBM (Simon Personal Communicator)<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1992<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> The modern smartphone combines mobile communication with advanced computing, transforming how people connect, access information, and manage daily tasks."
+                    }
+                }
+            },
+            "Mathematics": {
+                title: "Mathematics",
+                data: {
+                    calculus: {
+                        title: "<b><i style='color: blue;'>Calculus</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Calculus</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Isaac Newton and Gottfried Wilhelm Leibniz<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 17th century<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Introduced differentiation and integration, revolutionizing the study of motion, change, and growth in mathematics."
+                    },
+                    algebra: {
+                        title: "<b><i style='color: blue;'>Algebra</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Algebra</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Al-Khwarizmi (Father of Algebra)<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 9th century CE<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Muhammad ibn Musa Al-Khwarizmi introduced systematic methods for solving equations, and the term 'algebra' comes from al-Jabr in his book."
+                    },
+                    gameTheory: {
+                        title: "<b><i style='color: blue;'>Game Theory</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Game Theory</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> John von Neumann and Oskar Morgenstern<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1944<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Game theory analyzes strategic interactions between rational decision-makers and has applications in economics, biology, and social sciences."
+                    },
+                    zero: {
+                        title: "<b><i style='color: blue;'>Number Zero</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Number Zero</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Brahmagupta<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 7th century<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Defined the number zero and its operations, laying the foundation for the decimal system and modern arithmetic."
+                    },
+                    geometry: {
+                        title: "<b><i style='color: blue;'>Geometry</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Geometry</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Euclid (Father of Geometry)<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> ~300 BCE<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Euclid's work 'Elements' systematically organized geometric principles, laying the foundation for classical geometry and shaping mathematics for centuries."
+                    },
+                    probability: {
+                        title: "<b><i style='color: blue;'>Theory of Probability</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Theory of Probability</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Blaise Pascal and Pierre de Fermat<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1654<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Developed probability theory to analyze random events, with wide applications in statistics and decision-making."
+                    }
+                }
+            },
+            "Medicine": {
+                title: "Medicine",
+                data: {
+                    penicillin: {
+                        title: "<b><i style='color: blue;'>Penicillin</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Penicillin</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Alexander Fleming<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1928<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> This discovery marked the advent of antibiotics, saving millions of lives by treating bacterial infections effectively."
+                    },
+                    dnaStructure: {
+                        title: "<b><i style='color: blue;'>Structure of DNA</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Structure of DNA</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> James Watson, Francis Crick, Rosalind Franklin, and Maurice Wilkins<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1953<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> This discovery unveiled the double-helix structure of DNA, revolutionizing genetics and medical research."
+                    },
+                    insulinTherapy: {
+                        title: "<b><i style='color: blue;'>Insulin Therapy</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Insulin Therapy</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Frederick Banting and Charles Best<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1921<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Insulin became a life-saving treatment for diabetes, turning a fatal disease into a manageable condition."
+                    },
+                    xrayImaging: {
+                        title: "<b><i style='color: blue;'>X-Ray Imaging</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>X-Ray Imaging</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Wilhelm Conrad Roentgen<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1895<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> X-rays allowed doctors to see inside the human body for the first time, transforming diagnosis and treatment."
+                    },
+                    anesthesia: {
+                        title: "<b><i style='color: blue;'>Anesthesia for Surgery</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Anesthesia for Surgery</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Crawford Long<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1842<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> The use of ether as an anesthetic made pain-free surgery possible, significantly advancing surgical techniques."
+                    },
+                    bloodTransfusion: {
+                        title: "<b><i style='color: blue;'>Blood Groups and Transfusion</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Blood Groups and Transfusion</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Karl Landsteiner<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1901<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Identifying blood groups enabled safe blood transfusions and laid the groundwork for modern hematology."
+                    }
+                }
+            },
+
+            "Chemistry": {
+                title: "Chemistry",
+                data: {
+                    atomicTheory: {
+                        title: "<b><i style='color: blue;'>Atomic Theory</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Atomic Theory</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> John Dalton<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1803<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Dalton proposed that matter is made up of atoms, laying the foundation for modern chemistry."
+                    },
+                    discoveryOfOxygen: {
+                        title: "<b><i style='color: blue;'>Discovery of Oxygen</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of Oxygen</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Joseph Priestley and Carl Wilhelm Scheele<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1774<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Identifying oxygen revolutionized the understanding of combustion and respiration processes."
+                    },
+                    synthesisOfUrea: {
+                        title: "<b><i style='color: blue;'>Synthesis of Urea</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Synthesis of Urea</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Friedrich Wöhler<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1828<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Wöhler synthesized urea, proving that organic compounds can be created from inorganic materials."
+                    },
+                    discoveryOfNeutron: {
+                        title: "<b><i style='color: blue;'>Discovery of the Neutron</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of the Neutron</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> James Chadwick<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Chadwick discovered the neutron, a neutral subatomic particle, which was essential for the development of nuclear chemistry."
+                    },
+                    hydrogenBonding: {
+                        title: "<b><i style='color: blue;'>Hydrogen Bonding</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Hydrogen Bonding</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Linus Pauling<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1931<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Pauling elucidated the concept of hydrogen bonding, crucial for understanding molecular interactions and biological structures."
+                    },
+                    molecularOrbitalTheory: {
+                        title: "<b><i style='color: blue;'>Molecular Orbital Theory</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Molecular Orbital Theory</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Robert S. Mulliken<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> This theory explained how atomic orbitals combine to form molecular orbitals, providing a better understanding of chemical bonding."
+                    }
+                }
+            },
+
+            "Engineering": {
+                title: "Engineering",
+                data: {
+                    steamEngine: {
+                        title: "<b><i style='color: blue;'>The Steam Engine</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Steam Engine</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> James Watt<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1765<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> James Watt improved the steam engine, revolutionizing industrial manufacturing and transportation."
+                    },
+                    lightBulb: {
+                        title: "<b><i style='color: blue;'>The Light Bulb</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Light Bulb</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Thomas Edison<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1879<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Edison developed the first practical incandescent light bulb, illuminating homes and industries."
+                    },
+                    airplane: {
+                        title: "<b><i style='color: blue;'>The Airplane</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Airplane</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Wright Brothers<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1903<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Orville and Wilbur Wright achieved the first powered flight, marking the start of modern aviation."
+                    },
+                    electricBattery: {
+                        title: "<b><i style='color: blue;'>The Electric Battery</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Electric Battery</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Alessandro Volta<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1800<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Volta invented the electric battery, paving the way for portable electrical energy."
+                    },
+                    telephone: {
+                        title: "<b><i style='color: blue;'>The Telephone</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Telephone</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Alexander Graham Bell<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1876<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Bell invented the telephone, transforming global communication."
+                    },
+                    printingPress: {
+                        title: "<b><i style='color: blue;'>The Printing Press</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>The Printing Press</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Johannes Gutenberg<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1440<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Gutenberg’s press made mass production of books possible, spreading knowledge worldwide."
+                    }
+                }
+            },
+            "Geography": {
+                title: "Geography",
+                data: {
+                    longitudeLatitudeSystem: {
+                        title: "<b><i style='color: blue;'>Longitude and Latitude System</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Longitude and Latitude System</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Eratosthenes<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> ~240 BCE<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Introduced the grid system of longitude and latitude, enabling precise location mapping."
+                    },
+                    mountEverest: {
+                        title: "<b><i style='color: blue;'>Discovery of Mount Everest</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of Mount Everest</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Andrew Waugh (named by him)<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1856<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Identified and calculated the height of Mount Everest, the world’s tallest peak."
+                    },
+                    firstWorldAtlas: {
+                        title: "<b><i style='color: blue;'>First World Atlas</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>First World Atlas</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Abraham Ortelius<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1570<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Published the first modern atlas, \"Theatrum Orbis Terrarum,\" bringing global maps together."
+                    },
+                    waterCycle: {
+                        title: "<b><i style='color: blue;'>Understanding the Water Cycle</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Understanding the Water Cycle</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Bernard Palissy<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1580<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Described how water moves through evaporation, condensation, and precipitation on Earth."
+                    },
+                    discoveryAntarctica: {
+                        title: "<b><i style='color: blue;'>Discovery of Antarctica</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of Antarctica</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Fabian Gottlieb von Bellingshausen<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1820<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> One of the first explorers to sight and confirm the existence of Antarctica."
+                    },
+                    plateTectonics: {
+                        title: "<b><i style='color: blue;'>Theory of Plate Tectonics</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Theory of Plate Tectonics</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Alfred Wegener<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1912<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Proposed the idea of continental drift, explaining the movement of Earth's plates and their effects."
+                    }
+                }
+            }
+        };
+
+        // Function to toggle audio
+        function toggleAudio() {
+            const audioButton = document.getElementById("AudioBtn");
+            audioEnabled = !audioEnabled; // Toggle the audio state
+
+            // Update the button image based on the audio state
+            audioButton.src = audioEnabled ? "images/audio.png" : "images/audiooff.png";
+
+            // Notify user about the audio state
+            playAudio(audioEnabled ? "Audio Enabled" : "Audio Disabled");
+        }
+
+        // Function to play audio with pauses
+        function playAudioWithPauses(title, creator, year, description) {
+            const speechParts = [
+                `${title.replace(/<[^>]*>/g, '')}.`,
+                `Creator: ${creator.replace(/<[^>]*>/g, '')}.`,
+                `Year: ${year.replace(/<[^>]*>/g, '')}.`,
+                `Description: ${description.replace(/<[^>]*>/g, '')}.`
+            ];
+
+            // Recursively speak each part with pauses
+            function speakPart(index) {
+                if (index < speechParts.length) {
+                    const utterance = new SpeechSynthesisUtterance(speechParts[index]);
+                    utterance.rate = 1; // Adjust speech rate if needed
+                    utterance.addEventListener("end", () => speakPart(index + 1));
+                    speechSynthesis.speak(utterance);
+                }
+            }
+
+            window.speechSynthesis.cancel(); // Stop any ongoing speech
+            speakPart(0);
+        }
+
+        // Function to create a wonder div (handles image and text rendering)
+        function createWonderDiv(itemKey, itemData, category) {
+            const imagePath = itemData.imagePath || `./images/${itemKey}.png`;
+            const wonderDiv = document.createElement("div");
+            wonderDiv.classList.add("wonder"); // Base wonder styling
+            wonderDiv.classList.add(`category-${category}`); // Add category-specific class
+
+            const img = new Image();
+            img.src = imagePath;
+
+            // Display both image and text for other categories
+            img.onload = () => {
+                wonderDiv.innerHTML = `
+            <img src="${imagePath}" alt="${itemData.title}">
+            <p>${itemData.title}</p>
+        `;
+            };
+            img.onerror = () => {
+                wonderDiv.innerHTML = `<p>${itemData.title}</p>`; // Fallback to text if the image is missing
+            };
+
+            wonderDiv.setAttribute("onclick", `showInfo('${itemKey}')`);
+            return wonderDiv;
+        }
+
+        // Function to show info when an item is clicked
+        function showInfo(itemKey) {
+            const infoBox = document.getElementById("info-box");
+            const selectedCategory = document.getElementById("categoryDropdown").value;
+            const categoryData = categories[selectedCategory]?.data;
+
+            if (!categoryData || !categoryData[itemKey]) {
+                console.error(`Item '${itemKey}' not found in the selected category '${selectedCategory}'.`);
+                return;
+            }
+
+            const item = categoryData[itemKey];
+
+            // Extract details for audio
+            const creator = item.description.match(/Creator:\s*(.*?)<br>/)?.[1] || "Unknown";
+            const year = item.description.match(/Year:\s*(.*?)<br>/)?.[1] || "Unknown";
+            const description = item.description.match(/Description:\s*(.*?)$/)?.[1] || "No description available.";
+
+            // Update info box content
+            document.getElementById("info-title").innerHTML = item.plainTextTitle;
+            document.getElementById("info-description").innerHTML = item.description;
+
+            // Show the info box
+            infoBox.style.display = "block";
+
+            // Play audio if enabled
+            if (audioEnabled) {
+                const title = item.title.replace(/<[^>]*>/g, ''); // Remove HTML tags
+                playAudioWithPauses(title, creator, year, description);
+            }
+        }
+
+        document.getElementById("categoryDropdown").addEventListener("change", () => {
+            document.getElementById("info-box").style.display = "none";
+        });
+
+        // Function to handle category changes and populate the gallery
+        function handleCategoryChange() {
+            const selectedCategory = document.getElementById("categoryDropdown").value;
+            const category = categories[selectedCategory];
+
+            if (!category) {
+                console.error(`Selected category '${selectedCategory}' not found.`);
+                return;
+            }
+
+            // Update the gallery dynamically
+            const gallery = document.querySelector(".gallery");
+            gallery.innerHTML = ""; // Clear current items
+
+            Object.keys(category.data).forEach((key) => {
+                const item = category.data[key];
+                const wonderDiv = createWonderDiv(key, item, selectedCategory);
+                gallery.appendChild(wonderDiv);
+            });
+
+            // Hide the info-box when changing categories
+            document.getElementById("info-box").style.display = "none";
+        }
+
+        // Initialize the gallery for the default category on page load
+        function initializeGallery() {
+            document.getElementById("categoryDropdown").value = "Chemistry";
+            handleCategoryChange();
+        }
+
+        // Add event listeners
+        document.getElementById("AudioBtn").addEventListener("click", toggleAudio);
+        document.getElementById("categoryDropdown").addEventListener("change", handleCategoryChange);
+        window.onload = initializeGallery;
+
+        // Function to toggle audio
+        function toggleAudio() {
+            const audioButton = document.getElementById("AudioBtn");
+            audioEnabled = !audioEnabled; // Toggle the audio state
+
+            // Update the button image based on the audio state
+            audioButton.src = audioEnabled ? "images/audio.png" : "images/audiooff.png";
+
+            // Notify user about the audio state
+            playAudioWithPauses(audioEnabled ? "Audio Enabled." : "Audio Disabled.");
+        }
+
+    </script>
+</body>
+
+</html>
