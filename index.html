@@ -21,7 +21,7 @@
         content="An interactive app to learn about the 7 Wonders of the World, continents, habits, and more. Fun and educational!">
     <meta name="twitter:image" content="path/to/7wonders-preview-image.jpg">
 
-    <title>Discovers Abu Momen</title>
+    <title>Discovers by Abu Momen</title>
     <style>
         body {
             display: flex;
@@ -125,12 +125,10 @@
 
         }
 
-        .wonder.category-Technology,
-        .wonder.category-Mathematics,
-        .wonder.category-Medicine,
         .wonder.category-Chemistry,
-        .wonder.category-Engineering,
-        .wonder.category-Geography {
+        .wonder.category-Technology,
+        .wonder.category-Mathematics
+         {
             background: linear-gradient(to right, white, orange, yellow, green);
             /* Use 'background' instead of 'background-color' */
             border-radius: 10px;
@@ -142,7 +140,67 @@
             align-items: center;
             text-align: center;
             box-sizing: border-box;
-            color: #000080;
+            font-size: 18px;
+        }
+        .wonder.category-Country {
+            background: linear-gradient(135deg, #ff7eb3, blue, #ff758c, #ff6a66); 
+            /* background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
+            /* Use 'background' instead of 'background-color' */
+            border-radius: 10px;
+            padding: 5px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        .wonder.category-Engineering {
+            background: linear-gradient(red, yellow, green);
+            /* background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
+            /* Use 'background' instead of 'background-color' */
+            border-radius: 10px;
+            padding: 5px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        .wonder.category-Medicine {
+            background: conic-gradient(at 60% 45%, red, yellow, green);
+            /* background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); */
+            /* Use 'background' instead of 'background-color' */
+            border-radius: 10px;
+            padding: 5px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+
+        .wonder.category-Geography {
+            background: linear-gradient(to right, #8e2de2, #4a00e0);
+            /* Use 'background' instead of 'background-color' */
+            border-radius: 10px;
+            padding: 5px;
+            height: 85px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
             font-size: 18px;
         }
 
@@ -304,6 +362,7 @@
             <div class="header-title">Discover</div>
             <select id="categoryDropdown" class="dropdown">
                 <option value="Chemistry" selected>Chemistry</option>
+                <option value="Country" selected>Country</option>
                 <option value="Engineering">Engineering</option>
                 <option value="Geography">Geography</option>
                 <option value="Mathematics">Mathematics</option>
@@ -319,7 +378,7 @@
         <div class="gallery">
             <div class="wonder">
             </div>
-       </div>
+        </div>
 
         <div id="info-box">
             <h2 id="info-title"></h2>
@@ -342,6 +401,112 @@
 
         // Categories data
         const categories = {
+            "Country": {
+                title: "Country",
+                data: {
+                    america: {
+                        title: "<b><i style='color: white;'>America</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>America</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Christopher Columbus<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1492<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> While searching for a sea route to Asia, Columbus landed in the Americas, marking the start of European exploration and colonization."
+                    },
+                    australia: {
+                        title: "<b><i style='color: white;'>Australia</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Australia</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> James Cook<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1770<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Explored and mapped the eastern coastline of Australia, claiming it for Britain."
+                    },
+                    antarctica: {
+                        title: "<b><i style='color: white;'>Antarctica</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Antarctica</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Fabian Gottlieb von Bellingshausen and Mikhail Lazarev<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1820<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> First sighting of the Antarctic continent by a Russian expedition."
+                    },
+                    newZealand: {
+                        title: "<b><i style='color: white;'>New Zealand</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>New Zealand</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Abel Tasman<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1642<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> First European to reach New Zealand, encountering the indigenous Māori people."
+                    },
+                    singapore: {
+                        title: "<b><i style='color: white;'>Singapore</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Singapore</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Sir Stamford Raffles<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1819<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Established Singapore as a British trading post, transforming it into a global port."
+                    },
+                    southPole: {
+                        title: "<b><i style='color: white;'>South Pole</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>South Pole</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Roald Amundsen<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1911<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Led the first successful expedition to reach the South Pole."
+                    }
+                }
+            },
+            "Chemistry": {
+                title: "Chemistry",
+                data: {
+                    atomicTheory: {
+                        title: "<b><i style='color: blue;'>Atomic Theory</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Atomic Theory</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> John Dalton<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1803<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Dalton proposed that matter is made up of atoms, laying the foundation for modern chemistry."
+                    },
+                    discoveryOfOxygen: {
+                        title: "<b><i style='color: blue;'>Discovery of Oxygen</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of Oxygen</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Joseph Priestley and Carl Wilhelm Scheele<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1774<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Identifying oxygen revolutionized the understanding of combustion and respiration processes."
+                    },
+                    synthesisOfUrea: {
+                        title: "<b><i style='color: blue;'>Synthesis of Urea</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Synthesis of Urea</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Friedrich Wöhler<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1828<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Wöhler synthesized urea, proving that organic compounds can be created from inorganic materials."
+                    },
+                    discoveryOfNeutron: {
+                        title: "<b><i style='color: blue;'>Discovery of the Neutron</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of the Neutron</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> James Chadwick<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Chadwick discovered the neutron, a neutral subatomic particle, which was essential for the development of nuclear chemistry."
+                    },
+                    hydrogenBonding: {
+                        title: "<b><i style='color: blue;'>Hydrogen Bonding</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Hydrogen Bonding</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Linus Pauling<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1931<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> Pauling elucidated the concept of hydrogen bonding, crucial for understanding molecular interactions and biological structures."
+                    },
+                    molecularOrbitalTheory: {
+                        title: "<b><i style='color: blue;'>Molecular Orbital Theory</i></b>",
+                        plainTextTitle: "<b><i style='color: yellow;'>Molecular Orbital Theory</i></b>",
+                        description:
+                            "<strong style='color: #ffdd57;'>Creator:</strong> Robert S. Mulliken<br>" +
+                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
+                            "<strong style='color: #ffdd57;'>Description:</strong> This theory explained how atomic orbitals combine to form molecular orbitals, providing a better understanding of chemical bonding."
+                    }
+                }
+            },
             "Technology": {
                 title: "Technology",
                 data: {
@@ -504,61 +669,6 @@
                     }
                 }
             },
-
-            "Chemistry": {
-                title: "Chemistry",
-                data: {
-                    atomicTheory: {
-                        title: "<b><i style='color: blue;'>Atomic Theory</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Atomic Theory</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> John Dalton<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1803<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> Dalton proposed that matter is made up of atoms, laying the foundation for modern chemistry."
-                    },
-                    discoveryOfOxygen: {
-                        title: "<b><i style='color: blue;'>Discovery of Oxygen</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of Oxygen</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> Joseph Priestley and Carl Wilhelm Scheele<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1774<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> Identifying oxygen revolutionized the understanding of combustion and respiration processes."
-                    },
-                    synthesisOfUrea: {
-                        title: "<b><i style='color: blue;'>Synthesis of Urea</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Synthesis of Urea</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> Friedrich Wöhler<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1828<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> Wöhler synthesized urea, proving that organic compounds can be created from inorganic materials."
-                    },
-                    discoveryOfNeutron: {
-                        title: "<b><i style='color: blue;'>Discovery of the Neutron</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Discovery of the Neutron</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> James Chadwick<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> Chadwick discovered the neutron, a neutral subatomic particle, which was essential for the development of nuclear chemistry."
-                    },
-                    hydrogenBonding: {
-                        title: "<b><i style='color: blue;'>Hydrogen Bonding</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Hydrogen Bonding</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> Linus Pauling<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1931<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> Pauling elucidated the concept of hydrogen bonding, crucial for understanding molecular interactions and biological structures."
-                    },
-                    molecularOrbitalTheory: {
-                        title: "<b><i style='color: blue;'>Molecular Orbital Theory</i></b>",
-                        plainTextTitle: "<b><i style='color: yellow;'>Molecular Orbital Theory</i></b>",
-                        description:
-                            "<strong style='color: #ffdd57;'>Creator:</strong> Robert S. Mulliken<br>" +
-                            "<strong style='color: #ffdd57;'>Year:</strong> 1932<br>" +
-                            "<strong style='color: #ffdd57;'>Description:</strong> This theory explained how atomic orbitals combine to form molecular orbitals, providing a better understanding of chemical bonding."
-                    }
-                }
-            },
-
             "Engineering": {
                 title: "Engineering",
                 data: {
@@ -616,7 +726,7 @@
                 title: "Geography",
                 data: {
                     longitudeLatitudeSystem: {
-                        title: "<b><i style='color: blue;'>Longitude and Latitude System</i></b>",
+                        title: "<b><i style='color: white;'>Longitude and Latitude System</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>Longitude and Latitude System</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Eratosthenes<br>" +
@@ -624,7 +734,7 @@
                             "<strong style='color: #ffdd57;'>Description:</strong> Introduced the grid system of longitude and latitude, enabling precise location mapping."
                     },
                     mountEverest: {
-                        title: "<b><i style='color: blue;'>Discovery of Mount Everest</i></b>",
+                        title: "<b><i style='color: white;'>Discovery of Mount Everest</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>Discovery of Mount Everest</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Andrew Waugh (named by him)<br>" +
@@ -632,7 +742,7 @@
                             "<strong style='color: #ffdd57;'>Description:</strong> Identified and calculated the height of Mount Everest, the world’s tallest peak."
                     },
                     firstWorldAtlas: {
-                        title: "<b><i style='color: blue;'>First World Atlas</i></b>",
+                        title: "<b><i style='color: white;'>First World Atlas</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>First World Atlas</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Abraham Ortelius<br>" +
@@ -640,7 +750,7 @@
                             "<strong style='color: #ffdd57;'>Description:</strong> Published the first modern atlas, \"Theatrum Orbis Terrarum,\" bringing global maps together."
                     },
                     waterCycle: {
-                        title: "<b><i style='color: blue;'>Understanding the Water Cycle</i></b>",
+                        title: "<b><i style='color: white;'>Understanding the Water Cycle</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>Understanding the Water Cycle</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Bernard Palissy<br>" +
@@ -648,7 +758,7 @@
                             "<strong style='color: #ffdd57;'>Description:</strong> Described how water moves through evaporation, condensation, and precipitation on Earth."
                     },
                     discoveryAntarctica: {
-                        title: "<b><i style='color: blue;'>Discovery of Antarctica</i></b>",
+                        title: "<b><i style='color: white;'>Discovery of Antarctica</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>Discovery of Antarctica</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Fabian Gottlieb von Bellingshausen<br>" +
@@ -656,7 +766,7 @@
                             "<strong style='color: #ffdd57;'>Description:</strong> One of the first explorers to sight and confirm the existence of Antarctica."
                     },
                     plateTectonics: {
-                        title: "<b><i style='color: blue;'>Theory of Plate Tectonics</i></b>",
+                        title: "<b><i style='color: white;'>Theory of Plate Tectonics</i></b>",
                         plainTextTitle: "<b><i style='color: yellow;'>Theory of Plate Tectonics</i></b>",
                         description:
                             "<strong style='color: #ffdd57;'>Creator:</strong> Alfred Wegener<br>" +
